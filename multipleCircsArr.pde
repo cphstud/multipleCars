@@ -1,5 +1,6 @@
 int[] xPosArr, yPosArr, diamArr, colArr, speedArr;
 Drop[] drops;
+Catcher catcher;
 int numberOfCircles;
 int endY;
 int step;
@@ -11,6 +12,7 @@ void setup() {
   colorMode(HSB);
   size(400, 400);
   numberOfCircles=100;
+  catcher = new Catcher(width/30);
   drops = new Drop[numberOfCircles];
   initArrays();
   endY=10;
@@ -24,10 +26,16 @@ void setup() {
 
 void draw() {
   background(255);
-
+  catcher.setPosition(mouseX,mouseY);
+  catcher.display();
   for (int i=0; i<endY-3; i++) {
     drops[i].move();
     drops[i].display();
+    if (catcher.intersects(drops[i])) {
+      drops[i].xPos=1230;
+      println("Action needed");
+      // action?
+    }
 
   }
   if (endY < drops.length) { 
