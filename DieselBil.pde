@@ -1,0 +1,2 @@
+class DieselBil extends Bil {
+}
